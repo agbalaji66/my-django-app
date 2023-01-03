@@ -1,0 +1,9 @@
+body{
+    background-image: url("images/tabON.jpg");
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25% 25%;
+    background-color:whitesmoke;
+}

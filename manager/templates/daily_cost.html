@@ -1,0 +1,152 @@
+{% extends 'man_base.html' %}
+{% block headcontent %}
+<title>Daily Cost</title>
+<style>
+#wrapper {
+  padding-left: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-left: -250px;
+  left: 250px;
+  width: 180px;
+  background: rgb(233, 230, 230);
+  position: fixed;
+  height: 90%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width:750px) {
+
+    #wrapper {
+      padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+      left: 0;
+    }
+
+    #wrapper.active {
+      position: relative;
+      left: 250px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      left: 250px;
+      width: 250px;
+      transition: all 0.4s ease 0s;
+    }
+
+}
+</style>
+{% endblock %}
+{% block content%}
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <br />
+            <form method="POST" class="post-form" style="box-sizing: content-box">
+              {% csrf_token %}
+            <li>
+              <input type="hidden" name="form-type" value="last_week" />
+              <div class="form-group">
+                <label for="username" class="text-info">Start Date:</label><br>
+                <div class="form-row"><input type="date" class="hide-replaced" name="startDate" width="276" /></div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="text-info">End Date:</label><br>
+                <div class="form-row"><input type="date" class="hide-replaced"  name="endDate" width="276" /></div>
+              </div>
+              <div class="form-group">
+                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit" style="background-color: #3FABAF;">
+              </div>
+            </li>
+          </form>
+            <br />
+            <form method="POST" class="post-form" style="box-sizing: content-box">
+              {% csrf_token %}
+            <li>
+              <input type="hidden" name="form-type" value="this_month" />
+              <button type="submit" style="background-color: #3FABAF;">This Month</button>
+            </li>
+          </form>
+            <br />
+            <form method="POST" class="post-form" style="box-sizing: content-box">
+              {% csrf_token %}
+            <li>
+              <input type="hidden" name="form-type" value="last_month" />
+              <button type="submit" style="background-color: #3FABAF;">Last Month</button>
+            </li>
+          </form>
+            <br />
+            <!-- <form method="POST" class="post-form" style="box-sizing: content-box">
+              {% csrf_token %}
+            <li>
+              <input type="hidden" name="form-type" value="this quarter" />
+              <button type="submit" style="background-color: #3FABAF;">This Quarter</button>
+            </li>
+          </form>
+            <br /> -->
+            <!-- <form method="POST" class="post-form" style="box-sizing: content-box">
+              {% csrf_token %}
+            <li>
+              <input type="hidden" name="form-type" value="this year" />
+              <button type="submit" style="background-color: #3FABAF;">This Year</button>
+            </li>
+          </form> -->
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- content of page -->
+                        <div class="jumbotron">
+                            <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Capacity Planner</b></h2></center>
+                            <table class="table" style="font-size:small;">
+                              <thead class="thead-dark" style="background-color: #3FABAF;">
+                                  <tr>
+                                    <th scope="col">Utilization report</th>
+                                    <th scope="col">Between {{start}} and {{end}}</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td style="font-weight: bold;">Headcount</td>
+                                      <td>{{hc}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="font-weight: bold;">Capacity (%)</td>
+                                    <td>{{cap}}</td>
+                                </tr>
+                                <tr>
+                                  <td style="font-weight: bold;">Utilization (%)</td>
+                                  <td>{{uti}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

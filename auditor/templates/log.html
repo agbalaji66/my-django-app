@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block headcontent %}
+<title>Log</title>
+{% endblock %}
+
+{% block content%}
+
+<div class="jumbotron">
+    <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Create Action</b></h2></center>
+    <table class="table">
+        <thead class="thead-dark" style="background-color: #3FABAF;">
+            <tr>
+              <th scope="col">Associate</th>
+              <th scope="col">Task Perform Date</th>
+              <th scope="col">Task</th>
+              <th scope="col">SubTask</th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+                <form method="POST" class="post-form" style="box-sizing: content-box">
+                    {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="Assigned">
+                    <td>{{user}}</td>
+                    <td><div class="form-row"><input type="date" class="hide-replaced" name="perform-date" required/></div></td>
+                    <td><select name="task" class="form-control" id="comboA{{forloop.counter}}" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="BPM">BPM</option>
+                        <option value="EPS">EPS</option>
+                        <option value="Adhoc">Adhoc</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="Subtask" class="form-control" id="comboB{{forloop.counter}}" required>
+                            
+                        </select>
+                    </td>
+                    <script>
+                        document.getElementById("comboA{{forloop.counter}}").onchange = function(e){
+                           console.log(e.target.value)
+                           comboAValue = e.target.value
+                            if(comboAValue == "BPM")
+                               document.getElementById("comboB{{forloop.counter}}").innerHTML = '<option value="">--select--</option><option value="BPM Match Audit">BPM Match Audit</option><option value="Agency Validation - BPM">Agency Validation - BPM</option><option value="INF Audit">INF Audit</option><option value="BPM Consolidation">BPM Consolidation</option><option value="BPM Batch Creation">BPM Batch Creation</option><option value="BPM Result Uploading">BPM Result Uploading</option><option value="ARM Audit Generation">ARM Audit Generation</option><option value="UMS Consolidation">UMS Consolidation</option><option value="BPM Audit AoA">BPM Audit AoA</option><option value="ARM Result Consolidation">ARM Result Consolidation</option><option value="Accuracy Metrics Tracking">Accuracy Metrics Tracking</option><option value="ARM Audit Tracking">ARM Audit Tracking</option>'
+                            if(comboAValue == "EPS")
+                               document.getElementById("comboB{{forloop.counter}}").innerHTML = '<option value="">--select--</option><option value="EPS WL Audits">EPS WL Audits</option><option value="EPS WL Audits Insights">EPS WL Audits Insights</option><option value="EPS WL INF">EPS WL INF</option><option value="Unbranded Audits (both SOP)">Unbranded Audits (both SOP)</option><option value="Unbranded Audits (one SOP)">Unbranded Audits (one SOP)</option><option value="Unbranded Match (WIP)">Unbranded Match (WIP)</option><option value="Unbranded AOA">Unbranded AOA</option>'
+                            if(comboAValue == "Adhoc")
+                               document.getElementById("comboB{{forloop.counter}}").innerHTML = '<option value="">--select--</option><option value="Updating Tracker">Updating Tracker</option><option value="Analysis">Analysis</option><option value="others">others</option>'
+                        };
+                    </script>
+                    
+                    <td><select name="ChangeStatus">
+                        <option value='WIP'>WIP</option>
+                        </select>
+                    </td>
+                    <td><button type="submit" style="background-color: #3FABAF;">save</button></td>  
+                </tr>
+                </form> 
+        </tbody>
+    </table>
+
+
+    <center><h3 style="font-weight: bolder; color: #FD5825;"><b>BPM/EPS WIP</b></h3></center>
+    <table class="table">
+        <thead class="thead-dark" style="background-color: #3FABAF;">
+            <tr>
+              <th scope="col">Sl.no</th>
+              <th scope="col">Associate</th>
+              <th scope="col">Task Perform Date</th>
+              <th scope="col">Task</th>
+              <th scope="col">SubTask</th>
+              <th scope="col">Month</th>
+              <th scope="col">Status</th>
+              <th scope="col">FileName</th>
+              <th scope="col">Volume</th>
+              <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for j in bpm_obj %}
+            <form method="POST" class="post-form" style="box-sizing: content-box" name="aoa_table2">
+                {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="BPM">
+                    <input type="hidden" name="id" value="{{j.UUID}}">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{j.associate}}</td>
+                    <td>{{j.performed_date}}</td>
+                    <td>{{j.task}}</td>
+                    <td>{{j.Sub_Task}}</td>
+                    <td>{{j.month}}</td>
+                    <td>{{j.status}}</td>
+                    <td><input type="text" name="fil" required></td>
+                    <td><input type="number" name="vol" required></td>
+                    <td><button type="submit" style="background-color: green; color:white">Completed</button></td>    
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <center><h3 style="font-weight: bold; color: #FD5825;"><b>Adhoc WIP</b></h3></center>
+    <table class="table">
+        <thead class="thead-dark" style="background-color: #3FABAF;">
+            <tr>
+              <th scope="col">Sl.no</th>
+              <th scope="col">Associate</th>
+              <th scope="col">Task Perform Date</th>
+              <th scope="col">Task</th>
+              <th scope="col">SubTask</th>
+              <th scope="col">Month</th>
+              <th scope="col">Status</th>
+              <th scope="col">Comments</th>
+              <th scope="col">Hours Spent</th>
+              <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for j in adh_obj %}
+            <form method="POST" class="post-form" style="box-sizing: content-box" name="aoa_table2">
+                {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="adhoc">
+                    <input type="hidden" name="id" value="{{j.UUID}}">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{j.associate}}</td>
+                    <td>{{j.performed_date}}</td>
+                    <td>{{j.task}}</td>
+                    <td>{{j.Sub_Task}}</td>
+                    <td>{{j.month}}</td>
+                    <td>{{j.status}}</td>
+                    <td><input type="text" name="com" required></td>
+                    <td><input type="text" name="hr" required></td>
+                    <td><button type="submit" style="background-color: green; color:white">Completed</button></td>    
+                </tr>
+            </form>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

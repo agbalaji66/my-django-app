@@ -1,0 +1,18 @@
+<!-- loads path to static file-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'divs/background.css' %}" />
+    <link rel="shortcut icon" href="{% static 'divs/images/favicon.ico' %}" type="image/x-icon">
+    <title>Members</title>
+</head>
+<body>
+    {% include 'navbar.html'%}
+    <div class="jumbotron" style="background: transparent">
+        <h3 style="text-align: center;"><font color="#325d79"><b>MEET THE TEAM</b></font></h3>
+
+    </div>
+</body>
+</html>

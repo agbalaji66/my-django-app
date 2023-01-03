@@ -1,0 +1,7 @@
+body{
+    background-image: url("images/allbackground.jpg");
+    
+    /* Center and scale the image nicely */
+    background-repeat: no-repeat;
+    background-size: cover;
+}

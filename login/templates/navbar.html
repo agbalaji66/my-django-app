@@ -1,0 +1,44 @@
+<style>
+    .nav.navbar-nav.navbar-right li a span{
+    color: white;
+}
+.navbar-brand a{
+    color: white;
+}
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-inverse" style="border-radius: 0; background-color: #F26627; border-color: #F26627;">
+    <div class="container-fluid">
+        <!-- header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="font-size: large;" href="/"><font color="white">SMOpsDashboard</font></a>
+        </div>
+        <!-- iTems-->
+        <div class="collapse-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="">
+                    <a href="{%url 'members'%}">
+                        <span><font color="white">&nbsp;Members</font></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{%url 'login'%}">
+                        <span class="glyphicon glyphicon-log-in">&nbsp;Login</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

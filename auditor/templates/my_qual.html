@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block headcontent %}
+<title>Quality</title>
+{% endblock %}
+
+{% block content%}
+<div>
+    <form method="GET" action=".">
+        <div class="form-row">
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="category">Month</label>
+                <select id="category" class="form-control" name="mon">
+                  <option selected>Choose...</option>
+                  {% for cat in Mon %}
+                  <option value="{{ cat }}">{{ cat }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #3FABAF;">Search</button>        
+        </div>
+    </form>
+</div>
+<div class="jumbotron">
+    <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Quality Report</b></h2></center>
+    <table class="table">
+        <thead class="thead-dark" style="background-color: #3FABAF;">
+            <tr>
+            <th scope="col">Sl.no</th>
+              <th scope="col">Associate</th>
+              <th scope="col">Task Perform Date</th>
+              <th scope="col">Task</th>
+              <th scope="col">SubTask</th>
+              <th scope="col">Month</th>
+              <th scope="col">FileName</th>
+              <th scope="col">Volume</th>
+              <th scope="col">HoursSpent</th>
+              <th scope="col">Productivity</th>
+              <th scope="col">AOA_by</th>
+              <th scope="col">Accuracy</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for j in qs %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{j.associate}}</td>
+                <td>{{j.performed_date}}</td>
+                <td>{{j.task}}</td>
+                <td>{{j.Sub_Task}}</td>
+                <td>{{j.month}}</td>
+                <td>{{j.filename}}</td>
+                <td>{{j.volume}}</td>
+                <td>{{j.hours_spent}}</td>
+                <td>{{j.Productivity}}</td>
+                <td>{{j.aoa_by}}</td>
+                <td>{{j.accuracy}}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js" data-semver="2.0.3" data-require="jquery"></script>
+    <script type="text/javascript" src="http://www.appelsiini.net/projects/chained/jquery.chained.js?v=0.9.10"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron">
+    <div>
+        <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Add Attendence</b></h2></center>
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">User</th>  
+                  <th scope="col">Login Status</th>
+                  <th scope="col">Login Date</th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="POST" class="post-form" style="box-sizing: content-box">
+                    {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="add">
+                    <td><select name="ass" required>
+                        <option value="" selected disabled>--select--</option>
+                        {% for mk in RDA %}
+                            <option value="{{mk}}">{{mk}}</option>
+                        {% endfor %}
+                        </select>
+                    </td>
+                    <td><select name="action" required>
+                        <option value="" selected disabled>--select--</option>
+                        <option value="Work from Home">Work from Home</option>
+                        <option value="Work from Office">Work from Office</option>
+                        <option value="Half Day">Half Day</option>
+                        </select>
+                    </td>
+                    <td><input type="date" class="form-control" id="publishDateMax" name="date"></td>
+                    
+                    <td><button type="submit" style="background-color: #FD5825; color:white"><b>ADD LOG</b></button></td>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </div> 
+    </div>
+    <div>
+    <form method="GET" action=".">
+    <div class="form-row">
+        <div class="form-group col-md-1">
+            <label for="category">User</label>
+            <select id="category" class="form-control" name="rda">
+              <option selected>Choose...</option>
+              {% for cat in RDA %}
+              <option value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMin">Timestamp Start Date</label>
+            <input type="date" class="form-control" id="publishDateMin" name="date_min">
+        </div>
+        <div class="form-group col-md-2 col-lg-2">
+            <label for="publishDateMax">Timestamp End Date</label>
+            <input type="date" class="form-control" id="publishDateMax" name="date_max">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" style="background-color: #3FABAF;">Search</button>
+    </form>
+    <center><h2 style="font-weight: bolder; color: #FD5825;">Attendence Log</h2></center>
+                <table class="table">
+                    <thead class="thead-dark" style="background-color: #3FABAF;">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">USER</th>
+                            <th scope="col">LOGIN STATUS</th>
+                            <th scope="col">LOGIN TIME</th>
+                            <th scope="col">BENCHMARK HOURS</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in qs %}
+                        <form method="POST" class="post-form" style="box-sizing: content-box">
+                        {% csrf_token %}
+                        <tr>
+                            <td>{{obj.id}}</td>
+                            <input type="hidden" name="id" value="{{obj.id}}">
+                            <td>{{obj.user}}</td>
+                            <td>{{obj.login_status}}</td>
+                            <td>{{obj.login_time}}</td>
+                            <td>{{obj.benchmark_hours}}</td>
+                            <td><button type="submit" class="btn btn-primary">Delete</button></td>   
+                        </tr>
+                        </form>
+                        {% endfor %}
+                    </tbody>
+                </table>
+</div>   
+</body>
+</html>

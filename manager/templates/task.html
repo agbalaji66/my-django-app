@@ -1,0 +1,69 @@
+{% extends 'man_base.html' %}
+{% block headcontent %}
+<title>Task Info</title>
+{% endblock %}
+{% block content%}
+<div class="jumbotron">
+    <div>
+        <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Add Task Information</b></h2></center>
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">Task</th>
+                  <th scope="col">SubTask</th>
+                  <th scope="col">Volume/day</th>
+                  <th scope="col">Hours</th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="POST" class="post-form" style="box-sizing: content-box">
+                    {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="create">
+                    <td><input type="text" name="task" required></td>
+                    <td><input type="text" name="sub" required></td>
+                    <td><input type="text" name="vol" required></td>
+                    <td><input type="text" name="ben" required></td>
+                    <td><button type="submit" style="background-color: #3FABAF;">Save</button></td>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </div> 
+    </div>
+    <div class="jumbotron">
+    <center><h4 style="font-weight: bolder; color: #FD5825;"><b>Task Details:</b></h4></center>
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">Sl.no</th>  
+                  <th scope="col">Task</th>
+                  <th scope="col">SubTask</th>
+                  <th scope="col">Volume/day</th>
+                  <th scope="col">Hours</th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for uob in obj %}
+                <form method="POST" class="post-form" style="box-sizing: content-box" onSubmit="return confirm('Are you sure you wish to delete?');">
+                    {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="del">
+                    <input type="hidden" name="id" value="{{uob.Task_ID}}">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{uob.Task}}</td>
+                    <td>{{uob.Sub_Task}}</td>
+                    <td>{{uob.volume}}</td>
+                    <td>{{uob.benchmark}}</td>
+                    <td><button type="submit" style="background-color: #3FABAF;">Delete</button></td>
+                </tr>
+            </form>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}

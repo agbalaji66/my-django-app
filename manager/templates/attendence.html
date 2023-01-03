@@ -1,0 +1,88 @@
+{% extends 'man_base.html' %}
+{% block headcontent %}
+<title>Attendence</title>
+{% endblock %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+{% block content%}
+<div id="login">
+        <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                <form id="login-form" class="form" action="" method="POST">
+                    {% csrf_token %}
+                        <h3 class="text-center text-info">Select Date Range</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Start Date:</label><br>
+                            <div class="form-row"><input type="date" class="hide-replaced" name="startDate" width="276" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">End Date:</label><br>
+                            <div class="form-row"><input type="date" class="hide-replaced"  name="endDate" width="276" /></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                        </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="float:right">
+    <ul>
+        <li><font color="green">WO</font> : WeekOff</li>
+        <li><font color="red">L</font> : Leave</li>
+        <li>HD : Half day Leave</li>
+        <li><font color="green">P</font> : Present</li>
+        <li>WFH : Work From Home</li>
+        <li><font color="purple">LL</font> : LateLogin</li>
+    </ul>
+</div>
+<center><h1 style="font-weight: bolder; color: #FD5825;"><b>Attendence</b></h1></center>
+<div class="jumbotron">
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">Sl.no</th>  
+                  <th scope="col">Associate</th>
+                  <th scope="col">Leaves</th>
+                  <th scope="col">LateIn</th>
+                  <th scope="col">WFH</th>
+                  {% for date in date_range %}
+                  <th scope="col">{{date}}</th>
+                  {% endfor %}
+                </tr>
+                <tr>
+                    <th scope="col"> </th>  
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    {% for d in day %}
+                        <th scope="col">{{d}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for uob in attendence_list %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    {% for ob in uob %}
+                        <td><center>{{ob|safe}}</center></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

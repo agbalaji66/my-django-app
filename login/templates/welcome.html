@@ -1,0 +1,33 @@
+<!-- loads path to static file-->
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'divs/home.css' %}" />
+<link rel="shortcut icon" href="{% static 'divs/images/favicon.ico' %}" type="image/x-icon">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SMPO_Dashboard</title>
+</head>
+<body>
+    
+    {% include 'navbar.html'%}
+    <div class="jumbotron" style="background: transparent">
+        <div style="float: right;">
+            <p><font color="#325D79"><b>Have a look at our wiki pages:</b></font></p>
+            <ul>
+                <li><a href="https://w.amazon.com/bin/view/SM_Ops_DASHBOARD" target="_blank">DASHBOARD WIKI</a></li>
+                <li><a href="https://w.amazon.com/index.php/SMT/SelectionDiscovery/Components/Crawler/Operations/SMT_Browse_Crawl_Configuration" target="_blank">Crawl</a></li>
+                <li><a href="https://w.amazon.com/bin/preview/PCP_Compatibility_back_fill_exercise_Search_Crawl" target="_blank">Search crawl</a></li>
+                <li><a href="https://w.amazon.com/index.php/SM_Scrape_Configuration" target="_blank">Scrape</a></li>
+                <li><a href="https://w.amazon.com/bin/view/SMT_SOB/Program_Specific_Scrape_Audit/Part_Suppliers/" target="_blank">Scrape audit</a></li>
+                <li><a href="https://w.amazon.com/bin/view/PCP-_Compatibility_back_fill_exercise-_Manual/" target="_blank">Compatibility backfill</a></li>
+                <li><a href="https://w.amazon.com/bin/view/Scraper_Post-Processing_Tool/" target="_blank">SPT – Scraper post processing tool</a></li>
+                <li><a href="https://w.amazon.com/bin/view/Automated_Data_Upload_Pipeline/" target="_blank">ADUP – Automated data upload pipeline</a></li>
+                <li><a href="https://w.amazon.com/bin/view/ASIN_Compatibility_UI/" target="_blank">APAC – Automated platform for ASIN compatibility </a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

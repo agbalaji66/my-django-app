@@ -1,0 +1,69 @@
+{% extends 'man_base.html' %}
+{% block headcontent %}
+<title>Roles</title>
+{% endblock %}
+{% block content%}
+<div class="jumbotron">
+    <div>
+        <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Add User Role</b></h2></center>
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">UserName</th>
+                  <th scope="col">Role</th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="POST" class="post-form" style="box-sizing: content-box">
+                    {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="create">
+                    <td><input type="text" name="user"></td>
+                    <td>
+                    <input type="radio" name="role" value="auditor">
+                    <label for="male">auditor</label>
+                    <input type="radio" name="role" value="lead">
+                    <label for="female">lead</label>
+                    <input type="radio" name="role" value="manager">
+                    <label for="female">manager</label>
+                    </td>
+                    <td><button type="submit" style="background-color: #3FABAF;">Save</button></td>
+                </tr>
+            </form>
+            </tbody>
+        </table>
+    </div> 
+    </div>
+    <div class="jumbotron">
+    <center><h4 style="font-weight: bolder; color: #FD5825;"><b>User Details:</b></h4></center>
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">Sl.no</th>  
+                  <th scope="col">User</th>
+                  <th scope="col">Role</th>
+                  <th scope="col"></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for uob in obj %}
+                <form method="POST" class="post-form" style="box-sizing: content-box" onSubmit="return confirm('Are you sure you wish to delete?');">
+                    {% csrf_token %}
+                <tr>
+                    <input type="hidden" name="form_type" value="del">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{uob.user_name}}</td>
+                    <input type="hidden" name="uname" value="{{uob.user_name}}">
+                    <input type="hidden" name="urole" value="{{uob.user_role}}">
+                    <td>{{uob.user_role}}</td>
+                    <td><button type="submit" style="background-color: #3FABAF;">Delete</button></td>
+                </tr>
+            </form>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}

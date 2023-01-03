@@ -1,0 +1,20 @@
+<!-- loads path to static file-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'divs/background.css' %}" />
+    <link rel="shortcut icon" href="{% static 'divs/images/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background-color:#EFEEE;">
+    {% include 'navbar.html'%}
+    <div class="jumbotron" style="background: transparent">
+        <div style="background-color: #f9a26c; text-align: center;">
+            <p>{{status}}</p>
+        </div>
+    </div>
+</body>
+</html>

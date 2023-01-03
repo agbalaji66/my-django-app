@@ -1,0 +1,9 @@
+body{
+    background-image: url("images/Applications-Boost-Productivity.jpg");
+    
+    /* Center and scale the image nicely */
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 70% 100%;
+    background-color: whitesmoke;
+}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block headcontent %}
+<title>Quality</title>
+{% endblock %}
+
+{% block content%}
+<div class="jumbotron">
+    <center><h2 style="font-weight: bolder; color: #FD5825;"><b>Score Card</b></h2></center>
+    <table class="table">
+        <thead class="thead-dark" style="background-color: #3FABAF;">
+            <tr>
+                <th scope="col">{{user}}</th>
+                {% for j in mon %}
+                    <th scope="col">{{j}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for j in prod %}
+                <td>{{j|safe}}</td>
+                {% endfor %}
+            </tr> 
+            <tr>
+                {% for k in qual %}
+                <td>{{k|safe}}</td>
+                {% endfor %}
+            </tr> 
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

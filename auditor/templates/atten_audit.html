@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="login" style="float:left">
+    <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+            <div id="login-box" class="col-md-12">
+            <form id="login-form" class="form" action="" method="POST">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username" class="text-info">Start Date:</label><br>
+                        <div class="form-row"><input type="date" class="hide-replaced" name="startDate" width="276" /></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="text-info">End Date:</label><br>
+                        <div class="form-row"><input type="date" class="hide-replaced"  name="endDate" width="276" /></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="btn btn-info btn-md" value="submit" style="background-color: #3FABAF;">
+                    </div>
+            </form>
+            </div>
+        </div>
+</div>
+</div>
+<div style="float:right">
+    <ul>
+        <li><font color="green">WO</font> : WeekOff</li>
+        <li><font color="red">L</font> : Leave</li>
+        <li>HD : Half day Leave</li>
+        <li><font color="green">P</font> : Present</li>
+        <li>WFH : Work From Home</li>
+        <li><font color="purple">LL</font> : LateLogin</li>
+    </ul>
+</div>
+<center><h1 style="font-weight: bolder; color: #FD5825;"><b>Attendence</b></h1></center>
+<div class="jumbotron">
+        <table class="table">
+            <thead class="thead-dark" style="background-color: #3FABAF;">
+                <tr>
+                  <th scope="col">Associate</th>
+                  <th scope="col">Leaves</th>
+                  <th scope="col">LateIn</th>
+                  <th scope="col">WFH</th>
+                  {% for date in date_range %}
+                  <th scope="col">{{date}}</th>
+                  {% endfor %}
+                </tr>
+                <tr> 
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                    {% for d in day %}
+                        <th scope="col">{{d}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            
+            <tbody>
+                {% for uob in attendence_list %}
+                <tr>
+                    {% for ob in uob %}
+                    <td>{{ob|safe}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

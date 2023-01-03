@@ -1,0 +1,168 @@
+{% extends 'man_base.html' %}
+{% block headcontent %}
+<title>Master Edit</title>
+{% endblock %}
+
+{% block content%}
+<div>
+    <form method="GET" action=".">
+        <div class="form-row">
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="category">Associate</label>
+                <select id="category" class="form-control" name="ass">
+                  <option selected>Choose...</option>
+                  {% for cat in aas %}
+                  <option value="{{ cat }}">{{ cat }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="category">Month</label>
+                <select id="category" class="form-control" name="mon">
+                  <option selected>Choose...</option>
+                  {% for cat in Mon %}
+                  <option value="{{ cat }}">{{ cat }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-2 col-lg-2">
+                <label for="category">SubTask</label>
+                <select id="category" class="form-control" name="tk">
+                  <option selected>Choose...</option>
+                  {% for cat in task %}
+                  <option value="{{ cat }}">{{ cat }}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #3FABAF;">Search</button>        
+        </div>
+    </form>
+</div>
+<div class="jumbotron">
+    <center><h3 style="font-weight: bolder; color: #FD5825;"><b>Master Edit</b></h3></center>
+    <table class="table" style="font-size:small;">
+        <thead class="thead-dark" style="background-color: #3FABAF;">
+        <center><h4 style="color: #FD5825;"><b>VOLUME BASED</b></h4></center>
+            <tr>
+            <th scope="col">ID</th>
+              <th scope="col">Associate</th>
+              <th scope="col">Task Performed Date</th>
+              <th scope="col">Task</th>
+              <th scope="col">SubTask</th>
+              <th scope="col">Month</th>
+              <th scope="col">Status</th>
+              <th scope="col">FileName/ Comments</th>
+              <th scope="col">Volume</th>
+              <th scope="col">Hours Spent</th>
+              <th scope="col">Productivity</th>
+              <th scope="col">Change Volume</th>
+              <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for j in qs %}
+            <form method="POST" class="post-form" style="box-sizing: content-box" name="aoa_table2">
+                {% csrf_token %}
+            <tr>
+                <input type="hidden" name="form_type" value="volume">
+                <input type="hidden" name="id" value="{{j.UUID}}">
+                <td>{{j.UUID}}</td>
+                <td>{{j.associate}}</td>
+                <td>{{j.performed_date}}</td>
+                <td>{{j.task}}</td>
+                <td>{{j.Sub_Task}}</td>
+                <td>{{j.month}}</td>
+                <td>{{j.status}}</td>
+                <td>{{j.filename}}</td>
+                <td>{{j.volume}}</td>
+                <td>{{j.hours_spent}}</td>
+                <td>{{j.Productivity}}</td>
+                <td><input type="number" name="vol" style="width: 5em;" required></td>
+                <td><button type="submit" style="background-color: #3FABAF;">save</button></td>
+            </tr>
+        </form>
+            {% endfor %}
+    </tbody>
+</table>
+<table class="table" style="font-size:small;">
+    <thead class="thead-dark" style="background-color: #3FABAF;">
+    <center><h4 style="color: #FD5825;"><b>ADHOC ACTIVITIES</b></h4></center>
+        <tr>
+        <th scope="col">ID</th>
+          <th scope="col">Associate</th>
+          <th scope="col">Task Performed Date</th>
+          <th scope="col">Task</th>
+          <th scope="col">SubTask</th>
+          <th scope="col">Month</th>
+          <th scope="col">Status</th>
+          <th scope="col">FileName/ Comments</th>
+          <th scope="col">Volume</th>
+          <th scope="col">Hours Spent</th>
+          <th scope="col">Productivity</th>
+          <th scope="col">Change Hours</th>
+          <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for j in qs1 %}
+        <form method="POST" class="post-form" style="box-sizing: content-box" name="aoa_table2">
+            {% csrf_token %}
+        <tr>
+            <input type="hidden" name="id" value="{{j.UUID}}">
+            <td>{{j.UUID}}</td>
+            <td>{{j.associate}}</td>
+            <td>{{j.performed_date}}</td>
+            <td>{{j.task}}</td>
+            <td>{{j.Sub_Task}}</td>
+            <td>{{j.month}}</td>
+            <td>{{j.status}}</td>
+            <td>{{j.filename}}</td>
+            <td>{{j.volume}}</td>
+            <td>{{j.hours_spent}}</td>
+            <td>{{j.Productivity}}</td>
+            <td><input type="text" name="hr" style="width: 5em;" required></td>
+            <td><button type="submit" style="background-color: #3FABAF;">save</button></td>
+        </tr>
+    </form>
+        {% endfor %}
+</tbody>
+</table>
+<table class="table" style="font-size:small;">
+    <thead class="thead-dark" style="background-color: #3FABAF;">
+    <center><h4 style="color: #FD5825;"><b>STATIC HOURS</b></h4></center>
+        <tr>
+        <th scope="col">ID</th>
+          <th scope="col">Associate</th>
+          <th scope="col">Task Performed Date</th>
+          <th scope="col">Task</th>
+          <th scope="col">SubTask</th>
+          <th scope="col">Month</th>
+          <th scope="col">Status</th>
+          <th scope="col">FileName/ Comments</th>
+          <th scope="col">Volume</th>
+          <th scope="col">Hours Spent</th>
+          <th scope="col">Productivity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for j in qs2 %}
+        <tr>
+            <input type="hidden" name="id" value="{{j.UUID}}">
+            <td>{{j.UUID}}</td>
+            <td>{{j.associate}}</td>
+            <td>{{j.performed_date}}</td>
+            <td>{{j.task}}</td>
+            <td>{{j.Sub_Task}}</td>
+            <td>{{j.month}}</td>
+            <td>{{j.status}}</td>
+            <td>{{j.filename}}</td>
+            <td>{{j.volume}}</td>
+            <td>{{j.hours_spent}}</td>
+            <td>{{j.Productivity}}</td>
+        </tr>
+        {% endfor %}
+</tbody>
+</table>
+</div>
+
+{% endblock %}
